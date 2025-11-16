@@ -1,9 +1,10 @@
 import {Transaction} from "../../../domain/entity/transaction.entity";
+import {ITransactionEventInput} from "../../../domain/model/transaction-event-input.model";
 
 export class ConfirmTransactionUseCaseEvent {
 
-    execute(transaction: Transaction): Transaction {
+    execute(input: ITransactionEventInput): Transaction {
         console.log('UseCase Event: confirm transaction called');
-        return transaction;
+        return input.transaction;
     }
 }

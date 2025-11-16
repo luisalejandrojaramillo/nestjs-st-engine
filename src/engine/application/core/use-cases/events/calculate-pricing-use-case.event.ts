@@ -1,16 +1,17 @@
 import {Inject} from "@nestjs/common";
 import type {IPricingProvider} from "../../provider/pricing-provider.interface";
 import {Transaction} from "../../../domain/entity/transaction.entity";
+import {ITransactionEventInput} from "../../../domain/model/transaction-event-input.model";
 
 export class CalculatePricingUseCaseEvent {
     constructor(
         @Inject('IPricingProvider') private readonly pricingProvider: IPricingProvider,
         ) {}
 
-    execute(transaction: Transaction): Transaction {
-        const pricing = this.pricingProvider.calculate(transaction);
+    execute(input: ITransactionEventInput): Transaction {
+        const pricing = this.pricingProvider.calculate(input.transaction);
         console.log('UseCase Event: calculate pricing called {}', pricing.payerCommission);
-        transaction.addPricing(pricing.payerCommission)
-        return transaction;
+        input.transaction.addPricing(pricing.payerCommission)
+        return input.transaction;
     }
 }
