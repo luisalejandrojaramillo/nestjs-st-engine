@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import type { ITransferProvider } from '../application/core/provider/transfer-provider.interface.js';
-import type { Transfer } from '../application/domain/entity/transfer.entity.js';
+import  { Transfer } from '../application/domain/entity/transfer.entity.js';
 
 @Injectable()
 export class TransferProvider implements ITransferProvider {
@@ -8,8 +8,13 @@ export class TransferProvider implements ITransferProvider {
     console.log('TransferProvider: create', {
       id: transfer.id,
       description: transfer.description,
-      amount: transfer.requestAmount, // objeto Amount
+      amount: transfer.requestAmount,
     });
     return transfer;
+  }
+
+  validate(transfer: Transfer): boolean {
+      console.log("TransferProvider: validate")
+      return true;
   }
 }

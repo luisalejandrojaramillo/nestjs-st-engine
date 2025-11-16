@@ -1,5 +1,6 @@
-import type { Transfer } from '../../domain/entity/transfer.entity.js';
+import type {Transfer} from '../../domain/entity/transfer.entity.js';
 
 export interface ITransferProvider {
-  create(transfer: Transfer): Transfer;
+    validate(transfer: Transfer): boolean;
+    create(transfer: Transfer): Transfer;
 }
