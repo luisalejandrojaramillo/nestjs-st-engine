@@ -7,7 +7,6 @@ import { CreateTransactionUseCaseEvent } from './events/create-transaction-use-c
 import { CalculatePricingUseCaseEvent } from './events/calculate-pricing-use-case.event';
 import { ConfirmTransactionUseCaseEvent } from './events/confirm-transaction-use-case.event';
 import { DoPostProcessUseCaseEvent } from './events/do-post-process-use-case.event';
-import { Transaction } from '../../domain/entity/transaction.entity';
 import { ITransactionEventInput } from '../../domain/model/transaction-event-input.model';
 
 @Injectable()
@@ -24,21 +23,6 @@ export class DoTransferUseCase {
   execute(starter: TransferStarter): Transfer {
     console.log('UseCase: execute called');
 
-    const transaction = new Transaction(starter.description, starter.country);
-
-    this.validateHandler
-      .setNext(this.createHandler)
-      .setNext(this.pricingHandler)
-      .setNext(this.confirmHandler)
-      .setNext(this.postProcessHandler);
-
-    const eventInput: ITransactionEventInput = { transaction };
-    const chainResult = this.validateHandler.handle(eventInput);
-
-    if (!chainResult) {
-      throw new Error('Transfer chain failed');
-    }
-
     const transfer = new Transfer(
       starter.amount,
       starter.currency,
@@ -46,6 +30,19 @@ export class DoTransferUseCase {
       starter.country,
       starter.additionalData
     );
+
+    this.validateHandler
+      .setNext(this.createHandler)
+      .setNext(this.pricingHandler)
+      .setNext(this.confirmHandler)
+      .setNext(this.postProcessHandler);
+
+    const eventInput: ITransactionEventInput<Transfer> = { transaction: transfer };
+    const chainResult = this.validateHandler.handle(eventInput);
+
+    if (!chainResult) {
+      throw new Error('Transfer chain failed');
+    }
 
     return transfer;
   }
