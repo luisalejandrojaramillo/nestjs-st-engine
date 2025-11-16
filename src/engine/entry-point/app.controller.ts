@@ -11,10 +11,8 @@ export class AppController {
 
     @Get()
     doTransfer(): Transfer {
-        // El DTO viene de la capa de entrada (HTTP)
         const dto = new DoTransferDto(100.50, 'COP', 'Test transfer', 'CO', new Map());
 
-        // Convertimos el DTO a un objeto del core (TransferStarter)
         const starter = new TransferStarter(
             dto.amount,
             dto.currency,
@@ -24,8 +22,6 @@ export class AppController {
         );
 
         console.log('AppController: doTransfer called');
-
-        // Ejecutamos el caso de uso y retornamos la entidad
         return this.doTransferUseCase.execute(starter);
     }
 }
