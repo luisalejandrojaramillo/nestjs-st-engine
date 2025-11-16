@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './engine/entry-point/app.controller.js';
 import { DoTransferUseCase } from './engine/application/core/use-cases/do-transfer.usecase.js';
-import { TransferProvider } from './engine/providers/transfer.provider.js';
+import { TransferDomainProvider } from './engine/providers/transfer-domain-provider.service';
 import { PricingProvider } from './engine/providers/pricing.provider.js';
 import { TransactionProvider } from './engine/providers/transaction.provider';
 import { ValidateTransactionUseCaseEvent } from './engine/application/core/use-cases/events/validate-transaction-use-case.event';
@@ -14,7 +14,7 @@ import { ValidateTransactionUseCaseEvent } from './engine/application/core/use-c
     ValidateTransactionUseCaseEvent,
     {
       provide: 'ITransferProvider',
-      useClass: TransferProvider,
+      useClass: TransferDomainProvider,
     },
     {
       provide: 'IPricingProvider',
