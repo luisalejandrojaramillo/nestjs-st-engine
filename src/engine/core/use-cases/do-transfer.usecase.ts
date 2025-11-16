@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import type { ITransferProvider } from '../provider/transfer-provider.interface.js';
-import { TransferStarter } from '../model/transfer-starter.model.js';
+import { TransferStarter } from '../model/starter/transfer-starter.model';
 import { Transfer } from '../entity/transfer.entity.js';
 
 @Injectable()

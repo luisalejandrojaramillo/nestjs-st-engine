@@ -1,7 +1,7 @@
 import {Controller, Get} from '@nestjs/common';
 import {DoTransferUseCase} from '../core/use-cases/do-transfer.usecase.js';
 import {DoTransferDto} from './do-transfer.dto.js';
-import {TransferStarter} from '../core/model/transfer-starter.model.js';
+import {TransferStarter} from '../core/model/starter/transfer-starter.model';
 import {Transfer} from '../core/entity/transfer.entity.js';
 
 @Controller()
