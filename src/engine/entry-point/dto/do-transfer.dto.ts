@@ -1,5 +1,3 @@
-import {Transfer} from "../../application/domain/entity/transfer.entity";
-
 export class DoTransferDto {
     amount: number;
     currency: string;
