@@ -95,6 +95,7 @@ To add a new step:
 - Rule engine integration (e.g. JSON-based policies)
 
 ## Author
-[Luis Alejandro Jaramillo](luisalejandrojaramillo@hotmail.com)
+[Luis Alejandro Jaramillo](mailto:luisalejandrojaramillo@hotmail.com)
 
 ## License
+UNLICENSED – Internal POC usage only.
