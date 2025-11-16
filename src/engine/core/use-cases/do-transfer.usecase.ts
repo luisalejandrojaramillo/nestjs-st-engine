@@ -12,7 +12,6 @@ export class DoTransferUseCase {
   execute(starter: TransferStarter): Transfer {
     console.log('UseCase: execute called');
 
-    // Crear la entidad Transfer desde el starter
     const transfer = new Transfer(
       starter.amount,
       starter.currency,
@@ -20,8 +19,7 @@ export class DoTransferUseCase {
       starter.additionalData
     );
 
-    // Llamar al provider con la entidad completa del core
-    return this.transferProvider.doTransfer(transfer);
+    return this.transferProvider.create(transfer);
   }
 }
 
