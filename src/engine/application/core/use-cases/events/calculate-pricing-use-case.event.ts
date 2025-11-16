@@ -8,8 +8,8 @@ export class CalculatePricingUseCaseEvent {
         ) {}
 
     execute(transaction: Transaction): Transaction {
-        console.log('UseCase Event: calculate pricing called');
         const pricing = this.pricingProvider.calculate(transaction);
+        console.log('UseCase Event: calculate pricing called {}', pricing.payerCommission);
         return transaction;
     }
 }
