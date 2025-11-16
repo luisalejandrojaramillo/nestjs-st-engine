@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
-import type { ITransferProvider } from '../provider/transfer-provider.interface';
-import { TransferStarter } from '../../domain/model/starter/transfer-starter.model';
-import { Transfer } from '../../domain/entity/transfer.entity';
+import type { ITransferProvider } from '../provider/transfer-provider.interface.js';
+import { TransferStarter } from '../../domain/model/starter/transfer-starter.model.js';
+import { Transfer } from '../../domain/entity/transfer.entity.js';
 
 @Injectable()
 export class DoTransferUseCase {
@@ -22,4 +22,3 @@ export class DoTransferUseCase {
     return this.transferProvider.create(transfer);
   }
 }
-

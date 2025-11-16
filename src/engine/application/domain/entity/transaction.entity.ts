@@ -1,4 +1,4 @@
-import {UuidFactory} from "@nestjs/core/inspector/uuid-factory";
+import { randomUUID } from 'crypto';
 
 export class Transaction {
     id: string;
@@ -7,10 +7,9 @@ export class Transaction {
     lastUpdateDate: Date;
 
     constructor(description: string) {
-        this.id = new UuidFactory().toString();
+        this.id = randomUUID();
         this.description = description;
         this.creationDate = new Date();
         this.lastUpdateDate = new Date();
     }
 }
-
