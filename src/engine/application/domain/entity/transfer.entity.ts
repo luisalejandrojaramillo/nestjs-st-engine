@@ -9,9 +9,10 @@ export class Transfer extends Transaction {
         amount: number,
         currency: string,
         description: string,
+        country: string,
         additionalData: Map<string, string>,
     ) {
-        super(description);
+        super(description, country);
         this.requestAmount = new Amount(amount, currency);
         this.additionalData = additionalData;
     }

@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
-import type { ITransferProvider } from '../provider/transfer-provider.interface.js';
-import { TransferStarter } from '../../domain/model/starter/transfer-starter.model.js';
-import { Transfer } from '../../domain/entity/transfer.entity.js';
+import type { ITransferProvider } from '../provider/transfer-provider.interface';
+import { TransferStarter } from '../../domain/model/starter/transfer-starter.model';
+import { Transfer } from '../../domain/entity/transfer.entity';
 
 @Injectable()
 export class DoTransferUseCase {
@@ -16,6 +16,7 @@ export class DoTransferUseCase {
       starter.amount,
       starter.currency,
       starter.description,
+      starter.country,
       starter.additionalData
     );
 
