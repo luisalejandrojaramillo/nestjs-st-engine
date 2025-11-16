@@ -20,7 +20,6 @@ describe('TransactionProvider', () => {
   });
 
   it('debe rechazar transacción con descripción vacía', () => {
-    const tx = new Transaction('   ', 'CO');
-    expect(provider.validate(tx)).toBe(false);
+    expect(() => new Transaction('   ', 'CO')).toThrow('Description cannot be empty');
   });
 });

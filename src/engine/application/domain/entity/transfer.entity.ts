@@ -2,8 +2,8 @@ import {Amount} from "../value-objects/amount.vo";
 import {Transaction} from "./transaction.entity";
 
 export class Transfer extends Transaction {
-    requestAmount: Amount;
-    additionalData: Map<string, string>;
+    private readonly _requestAmount: Amount;
+    private readonly _additionalData: Map<string, string>;
 
     constructor(
         amount: number,
@@ -13,7 +13,16 @@ export class Transfer extends Transaction {
         additionalData: Map<string, string>,
     ) {
         super(description, country);
-        this.requestAmount = new Amount(amount, currency);
-        this.additionalData = additionalData;
+        this._requestAmount = new Amount(amount, currency);
+        this._additionalData = additionalData;
+    }
+
+    // Getters
+    get requestAmount(): Amount {
+        return this._requestAmount;
+    }
+
+    get additionalData(): Map<string, string> {
+        return this._additionalData;
     }
 }

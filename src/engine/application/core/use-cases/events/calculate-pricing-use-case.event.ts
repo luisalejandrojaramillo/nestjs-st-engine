@@ -10,6 +10,7 @@ export class CalculatePricingUseCaseEvent {
     execute(transaction: Transaction): Transaction {
         const pricing = this.pricingProvider.calculate(transaction);
         console.log('UseCase Event: calculate pricing called {}', pricing.payerCommission);
+        transaction.addPricing(pricing.payerCommission)
         return transaction;
     }
 }
