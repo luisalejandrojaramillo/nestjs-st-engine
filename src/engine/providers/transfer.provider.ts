@@ -1,6 +1,6 @@
 import {Injectable} from '@nestjs/common';
-import {ITransferProvider} from '../core/provider/transfer-provider.interface.js';
-import {Transfer} from '../core/entity/transfer.entity.js';
+import {ITransferProvider} from '../application/core/provider/transfer-provider.interface.js';
+import {Transfer} from '../application/domain/entity/transfer.entity.js';
 
 @Injectable()
 export class TransferProvider implements ITransferProvider {

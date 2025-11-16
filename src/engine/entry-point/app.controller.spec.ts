@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller.js';
-import { DoTransferUseCase } from '../core/use-cases/do-transfer.usecase.js';
+import { DoTransferUseCase } from '../application/core/use-cases/do-transfer.usecase.js';
 
 describe('AppController', () => {
   let appController: AppController;

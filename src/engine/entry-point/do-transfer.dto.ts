@@ -1,4 +1,4 @@
-import {Transfer} from "../core/entity/transfer.entity";
+import {Transfer} from "../application/domain/entity/transfer.entity";
 
 export class DoTransferDto {
     amount: number;
