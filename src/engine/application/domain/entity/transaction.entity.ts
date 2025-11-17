@@ -68,6 +68,11 @@ export class Transaction {
         this.updateLastUpdateDate();
     }
 
+    rejectTransaction(): void {
+        this._workflowStatus = TransactionWorkflowStatus.REJECTED;
+        this.updateLastUpdateDate();
+    }
+
     private updateLastUpdateDate(): void {
         this._lastUpdateDate = new Date();
     }
