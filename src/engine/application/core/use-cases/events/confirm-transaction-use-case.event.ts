@@ -1,6 +1,7 @@
 import {ITransactionEventInput} from "../../../domain/model/transaction-event-input.model";
 import {AbstractConditionHandler} from "../../handler/abstract-condition-handler";
 import {Transfer} from "../../../domain/entity/transfer.entity";
+import { InvalidTransactionException } from "../../exceptions/invalid-transaction.exception";
 
 export class ConfirmTransactionUseCaseEvent extends AbstractConditionHandler {
     constructor() {
@@ -15,7 +16,7 @@ export class ConfirmTransactionUseCaseEvent extends AbstractConditionHandler {
             event.transaction.completeTransaction();
         } else {
             console.log('UseCase Event: confirm transaction - transaction is not a Transfer');
-            event.transaction.rejectTransaction();
+            throw new InvalidTransactionException('Expected Transfer instance during confirmation step');
         }
         return super.handle(event);
     }
