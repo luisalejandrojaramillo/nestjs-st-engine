@@ -1,14 +1,22 @@
 import { Inject } from '@nestjs/common';
 import type { ITransactionProvider } from '../../provider/transaction-provider.interface';
-import { Transaction } from '../../../domain/entity/transaction.entity';
+import {ITransactionEventInput} from "../../../domain/model/transaction-event-input.model";
+import {AbstractConditionHandler} from "../../handler/abstract-condition-handler";
 
-export class ValidateTransactionUseCaseEvent {
+export class ValidateTransactionUseCaseEvent extends AbstractConditionHandler {
     constructor(
         @Inject('ITransactionProvider') private readonly transactionProvider: ITransactionProvider,
-    ) {}
+    ) {
+        super();
+    }
 
-    execute(transaction: Transaction): boolean {
+    public handle(event: ITransactionEventInput): boolean {
         console.log('UseCase Event: validate transaction called');
-        return this.transactionProvider.validate(transaction);
+        const isValid = this.transactionProvider.validate(event.transaction);
+        if (!isValid) {
+            console.log('UseCase Event: validation failed, stopping chain');
+            return false;
+        }
+        return super.handle(event);
     }
 }

@@ -1,4 +1,5 @@
 import { randomUUID } from 'crypto';
+import { TransactionWorkflowStatus } from '../value-objects/transaction-workflow-status.vo';
 
 export class Transaction {
     private readonly _id: string;
@@ -7,6 +8,7 @@ export class Transaction {
     private readonly _creationDate: Date;
     private _lastUpdateDate: Date;
     private _commission: number;
+    private _workflowStatus: TransactionWorkflowStatus;
 
     constructor(description: string, country: string) {
         if (!description || description.trim().length === 0) {
@@ -20,6 +22,7 @@ export class Transaction {
         this._country = country;
         this._creationDate = new Date();
         this._lastUpdateDate = new Date();
+        this._workflowStatus = TransactionWorkflowStatus.CREATED;
     }
 
     // Getters
@@ -47,11 +50,21 @@ export class Transaction {
         return this._commission;
     }
 
+    get workflowStatus(): TransactionWorkflowStatus {
+        return this._workflowStatus;
+    }
+
     addPricing(commission: number): void {
         if (commission < 0) {
             throw new Error('Commission cannot be negative');
         }
         this._commission = commission;
+        this._workflowStatus = TransactionWorkflowStatus.PRICED;
+        this.updateLastUpdateDate();
+    }
+
+    completeTransaction(): void {
+        this._workflowStatus = TransactionWorkflowStatus.COMPLETED;
         this.updateLastUpdateDate();
     }
 

@@ -1,9 +1,13 @@
-import {Transaction} from "../../../domain/entity/transaction.entity";
+import {ITransactionEventInput} from "../../../domain/model/transaction-event-input.model";
+import {AbstractConditionHandler} from "../../handler/abstract-condition-handler";
 
-export class DoPostProcessUseCaseEvent {
+export class DoPostProcessUseCaseEvent extends AbstractConditionHandler {
+    constructor() {
+        super();
+    }
 
-    execute(transaction: Transaction): Transaction {
+    public handle(event: ITransactionEventInput): boolean {
         console.log('UseCase Event: do post-process called');
-        return transaction;
+        return super.handle(event);
     }
 }

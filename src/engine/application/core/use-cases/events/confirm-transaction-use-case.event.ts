@@ -1,9 +1,14 @@
-import {Transaction} from "../../../domain/entity/transaction.entity";
+import {ITransactionEventInput} from "../../../domain/model/transaction-event-input.model";
+import {AbstractConditionHandler} from "../../handler/abstract-condition-handler";
 
-export class ConfirmTransactionUseCaseEvent {
+export class ConfirmTransactionUseCaseEvent extends AbstractConditionHandler {
+    constructor() {
+        super();
+    }
 
-    execute(transaction: Transaction): Transaction {
+    public handle(event: ITransactionEventInput): boolean {
         console.log('UseCase Event: confirm transaction called');
-        return transaction;
+        event.transaction.completeTransaction();
+        return super.handle(event);
     }
 }
