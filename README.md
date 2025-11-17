@@ -98,4 +98,4 @@ To add a new step:
 [Luis Alejandro Jaramillo](mailto:luisalejandrojaramillo@hotmail.com)
 
 ## License
-UNLICENSED – Internal POC usage only.
+[UNLICENSED](LICENSE) – Internal POC usage only.
