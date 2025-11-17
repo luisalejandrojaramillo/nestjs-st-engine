@@ -8,6 +8,7 @@ export class ConfirmTransactionUseCaseEvent extends AbstractConditionHandler {
 
     public handle(event: ITransactionEventInput): boolean {
         console.log('UseCase Event: confirm transaction called');
+        event.transaction.completeTransaction();
         return super.handle(event);
     }
 }
