@@ -1,18 +1,24 @@
-import {Inject} from "@nestjs/common";
-import type {ITransactionProvider} from "../../provider/transaction-provider.interface";
-import {ITransactionEventInput} from "../../../domain/model/transaction-event-input.model";
-import {AbstractConditionHandler} from "../../handler/abstract-condition-handler";
+import { Injectable } from "@nestjs/common";
+import { TransactionProvider } from "../../../../providers/transaction.provider";
+import type { ITransactionProvider } from "../../provider/transaction-provider.interface";
+import { ITransactionEventInput } from "../../../domain/model/transaction-event-input.model";
+import { AbstractConditionHandler } from "../../handler/abstract-condition-handler";
+import { InvalidTransactionException } from "../../exceptions/invalid-transaction.exception";
 
+@Injectable()
 export class CreateTransactionUseCaseEvent extends AbstractConditionHandler {
-    constructor(
-        @Inject('ITransactionProvider') private readonly transactionProvider: ITransactionProvider,
-    ) {
+    constructor(private readonly transactionProvider: TransactionProvider) {
         super();
     }
 
     public handle(event: ITransactionEventInput): boolean {
         console.log('UseCase Event: create transaction called');
-        this.transactionProvider.create(event.transaction);
+        try {
+            this.transactionProvider.create(event.transaction);
+        } catch (e) {
+            event.transaction.rejectTransaction();
+            throw new InvalidTransactionException();
+        }
         return super.handle(event);
     }
 }

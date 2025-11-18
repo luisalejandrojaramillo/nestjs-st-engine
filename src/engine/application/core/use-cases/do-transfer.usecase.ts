@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@nestjs/common';
-import type { ITransferDomainProvider } from '../provider/transfer-provider.interface';
 import { TransferStarter } from '../../domain/model/starter/transfer-starter.model';
 import { Transfer } from '../../domain/entity/transfer.entity';
 import { ValidateTransactionUseCaseEvent } from './events/validate-transaction-use-case.event';
@@ -12,7 +11,6 @@ import { ITransactionEventInput } from '../../domain/model/transaction-event-inp
 @Injectable()
 export class DoTransferUseCase {
   constructor(
-    @Inject('ITransferProvider') private readonly transferProvider: ITransferDomainProvider,
     private readonly validateHandler: ValidateTransactionUseCaseEvent,
     private readonly createHandler: CreateTransactionUseCaseEvent,
     private readonly pricingHandler: CalculatePricingUseCaseEvent,

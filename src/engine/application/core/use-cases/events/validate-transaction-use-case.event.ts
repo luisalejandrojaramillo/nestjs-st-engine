@@ -1,12 +1,11 @@
-import { Inject } from '@nestjs/common';
-import type { ITransactionProvider } from '../../provider/transaction-provider.interface';
-import {ITransactionEventInput} from "../../../domain/model/transaction-event-input.model";
-import {AbstractConditionHandler} from "../../handler/abstract-condition-handler";
+import { Injectable } from '@nestjs/common';
+import { TransactionProvider } from '../../../../providers/transaction.provider';
+import { ITransactionEventInput } from '../../../domain/model/transaction-event-input.model';
+import { AbstractConditionHandler } from '../../handler/abstract-condition-handler';
 
+@Injectable()
 export class ValidateTransactionUseCaseEvent extends AbstractConditionHandler {
-    constructor(
-        @Inject('ITransactionProvider') private readonly transactionProvider: ITransactionProvider,
-    ) {
+    constructor(private readonly transactionProvider: TransactionProvider) {
         super();
     }
 
