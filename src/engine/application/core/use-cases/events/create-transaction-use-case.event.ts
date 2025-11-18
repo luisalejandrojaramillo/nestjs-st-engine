@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { TransactionProvider } from "../../../../providers/transaction.provider";
-import type { ITransactionProvider } from "../../provider/transaction-provider.interface";
 import { ITransactionEventInput } from "../../../domain/model/transaction-event-input.model";
 import { AbstractConditionHandler } from "../../handler/abstract-condition-handler";
 import { InvalidTransactionException } from "../../exceptions/invalid-transaction.exception";

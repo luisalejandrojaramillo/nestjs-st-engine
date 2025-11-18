@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { TransferStarter } from '../../domain/model/starter/transfer-starter.model';
 import { Transfer } from '../../domain/entity/transfer.entity';
 import { ValidateTransactionUseCaseEvent } from './events/validate-transaction-use-case.event';
